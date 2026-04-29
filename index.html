@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PacketWords — A trilingual cybersecurity terminology glossary. Search and explore 130+ cybersecurity terms in English, Ukrainian, and Polish." />
+  <meta name="keywords" content="cybersecurity, glossary, terminology, кібербезпека, cyberbezpieczeństwo, PacketWords" />
+  <meta name="author" content="Olena Rupa" />
+  <title>PacketWords — Cybersecurity Terminology Explained</title>
+
+  <!-- Google Fonts: Inter for UI, Fira Code for terms -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ========== TOP BAR (Language Toggle) ========== -->
+  <header class="top-bar" id="topBar">
+    <div class="top-bar__brand">
+      <span class="top-bar__logo">⛨</span>
+      <span class="top-bar__name">PacketWords</span>
+    </div>
+    <nav class="lang-toggle" id="langToggle" aria-label="Interface language selector">
+      <button class="lang-btn active" data-lang="en" id="langBtnEn" title="English">EN</button>
+      <button class="lang-btn" data-lang="uk" id="langBtnUk" title="Українська">UK</button>
+      <button class="lang-btn" data-lang="pl" id="langBtnPl" title="Polski">PL</button>
+    </nav>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main-content">
+    <!-- Hero / Title Section -->
+    <section class="hero" id="heroSection">
+      <h1 class="hero__title" id="mainTitle">Cybersecurity Terminology Explained</h1>
+      <p class="hero__vision" id="visionStatement">
+        Decoding the digital battlefield.
+      </p>
+    </section>
+
+    <!-- Search Area -->
+    <section class="search-area" id="searchArea">
+      <div class="search-wrapper">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search terms in any language…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="search-clear" id="searchClear" title="Clear search" aria-label="Clear search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Zen Mode Toggle -->
+        <button class="zen-toggle" id="zenToggle" title="Zen Mode" aria-label="Toggle Zen Mode">
+          <svg class="zen-icon zen-icon--focus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+          </svg>
+          <span class="zen-label" id="zenLabel">Zen Mode</span>
+        </button>
+      </div>
+
+      <!-- Result Stats -->
+      <div class="search-stats" id="searchStats"></div>
+    </section>
+
+    <!-- Alphabetical Index -->
+    <nav class="alpha-index-wrapper" id="alphaIndexWrapper">
+      <div class="alpha-index" id="alphaIndex" aria-label="Alphabetical index">
+        <!-- Letters populated dynamically by JS -->
+      </div>
+      <button class="show-all-btn" id="showAllBtn">Show All</button>
+    </nav>
+
+    <!-- Results Area -->
+    <section class="results" id="resultsArea" aria-live="polite">
+      <!-- Cards populated dynamically by JS -->
+    </section>
+
+    <!-- Empty State -->
+    <div class="empty-state hidden" id="emptyState">
+      <div class="empty-state__icon">
+        <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="35" cy="35" r="22" opacity="0.4"/>
+          <line x1="50" y1="50" x2="68" y2="68" stroke-width="4" opacity="0.4"/>
+          <line x1="28" y1="35" x2="42" y2="35" opacity="0.6"/>
+        </svg>
+      </div>
+      <p class="empty-state__text" id="emptyStateText">Term not found in the dictionary</p>
+    </div>
+
+    <!-- Initial State (all terms) -->
+    <div class="initial-state hidden" id="initialState">
+      <div class="initial-state__icon">
+        <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+          <rect x="10" y="10" width="60" height="60" rx="8"/>
+          <line x1="20" y1="25" x2="60" y2="25"/>
+          <line x1="20" y1="35" x2="50" y2="35"/>
+          <line x1="20" y1="45" x2="55" y2="45"/>
+          <line x1="20" y1="55" x2="40" y2="55"/>
+        </svg>
+      </div>
+      <p class="initial-state__text" id="initialStateText">Start typing or select a letter to browse terms</p>
+    </div>
+  </main>
+
+  <!-- ========== BIBLIOGRAPHY SECTION ========== -->
+  <section class="bibliography-section" id="bibliographySection">
+    <button class="bibliography-toggle" id="bibliographyToggle" aria-expanded="false">
+      <span class="bibliography-toggle__title" id="biblioTitle">Sources / Reference Material</span>
+      <svg class="bibliography-toggle__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+    <div class="bibliography-content" id="bibliographyContent">
+      <ol class="bibliography-list">
+        <li>
+          <span class="biblio-text">Резнікова О. О., Войтовський К. Є. Термінологічний словник-довідник у сфері національної стійкості. Київ : НІСД, 2024. 80 с. URL: <a href="https://doi.org/10.53679/NISS-book.2024.01" target="_blank" rel="noopener noreferrer">https://doi.org/10.53679/NISS-book.2024.01</a></span>
+          <a href="docs/S6.pdf" download class="biblio-download" title="Download PDF" aria-label="Download source 1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </li>
+        <li>
+          <span class="biblio-text">Pączkowski T. Słownik cyberbezpieczeństwa. Katowice, 2017. ISBN 978-83-934380-5-1.</span>
+          <a href="docs/S3.pdf" download class="biblio-download" title="Download PDF" aria-label="Download source 2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </li>
+        <li>
+          <span class="biblio-text">Гладун А. Я., Пучков О. О., Субач І. Ю., Хала К. О. Англо-український словник термінів з інформаційних технологій та кібербезпеки. Київ : ІСЗЗІ КПІ ім. Ігоря Сікорського, 2018. 380 с.</span>
+          <a href="docs/S4.pdf" download class="biblio-download" title="Download PDF" aria-label="Download source 3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </li>
+        <li>
+          <span class="biblio-text">Пальчевська О. С., Добровольська С. Р., Маланюк М. С., Губич П. В. Англо-український глосарій термінів ІТ-технологій та кібербезпеки = English-Ukrainian glossary of IT and cybersecurity terms : словник. Львів : Львівський державний університет безпеки життєдіяльності, 2025. 266 с.</span>
+          <a href="docs/S5.pdf" download class="biblio-download" title="Download PDF" aria-label="Download source 4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </li>
+        <li>
+          <span class="biblio-text">Mrowiec D. Information security and cybersecurity – vocabulary. Kraków : B-secure, 2023.</span>
+          <a href="docs/S2.pdf" download class="biblio-download" title="Download PDF" aria-label="Download source 5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </li>
+        <li>
+          <span class="biblio-text">National Initiative for Cybersecurity Careers and Studies (NICCS). Cybersecurity Glossary. URL: <a href="https://niccs.cisa.gov/resources/glossary" target="_blank" rel="noopener noreferrer">https://niccs.cisa.gov/resources/glossary</a></span>
+          <a href="docs/S1.csv" download class="biblio-download" title="Download CSV" aria-label="Download source 6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-content">
+      <div class="footer-main">
+        <p class="footer-copyright">
+          &copy; 2026 <strong>Designed and Developed by Olena Rupa</strong>
+        </p>
+        <p class="footer-tagline" id="footerTagline">PacketWords — Cybersecurity Terminology Explained</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Olen-A/packetwords" target="_blank" rel="noopener noreferrer" class="footer-link" id="footerGithub">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span id="footerGithubText">Contact Us / Open Source</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
