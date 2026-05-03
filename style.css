@@ -985,6 +985,11 @@ a:focus:not(:focus-visible) {
   outline: none;
 }
 
+.search-box input:focus,
+.search-box input:focus-visible {
+  outline: none;
+}
+
 /* ============================================================
    PRINT STYLES
    ============================================================ */
